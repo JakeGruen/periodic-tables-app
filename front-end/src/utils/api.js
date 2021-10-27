@@ -5,8 +5,7 @@
  import formatReservationDate from "./format-reservation-date";
  import formatReservationTime from "./format-reservation-date";
  
- const API_BASE_URL =
-   "https://reservation-app-backend.vercel.app" || "http://localhost:5000";
+ const API_BASE_URL = "https://reservation-app-backend.vercel.app" || "http://localhost:6000";
  
  /**
   * Defines the default headers for these functions to work with `json-server`
@@ -53,9 +52,9 @@
  }
  
  /**
-  * Retrieves all existing reservation.
+  * Retrieves existing reservations.
   * @returns {Promise<[reservation]>}
-  *  a promise that resolves to a possibly empty array of reservation saved in the database.
+  *  a promise that resolves to an array of reservation saved in the database.
   */
  
  export async function listReservations(params, signal) {

@@ -4,7 +4,7 @@ import { deleteReservationFromTable } from "../utils/api";
 export default function DisplayTable({ tables, loadTables, loadReservations }) {
   const finishHandler = async (table_id) => {
     const finished = window.confirm(
-      "Is this table ready to seat new guests? This cannot be undone."
+      "Ready to seat new guests?"
     );
     if (finished) {
       try {
@@ -26,8 +26,8 @@ export default function DisplayTable({ tables, loadTables, loadReservations }) {
               <div
                 className="card"
                 style={{
-                  backgroundColor: "lightpink",
-                  border: "solid 1px red",
+                  backgroundColor: "teal",
+                  border: "solid 2px blue",
                   marginBottom: "15px",
                 }}
               >

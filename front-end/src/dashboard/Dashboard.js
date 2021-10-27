@@ -29,7 +29,7 @@ export default function Dashboard({
   return (
     <main className="main container-fluid">
       <div className="dashboard-title">
-        <h1>Dashboard</h1>
+        <h1 style={{textAlign: 'center'}}>Dashboard</h1>
       </div>
 
       <hr className="page-title-separator" />
