@@ -72,7 +72,7 @@
  }
  
  
- function validateReservation(req, res, next) {
+ function validReservation(req, res, next) {
    const {
      first_name,
      last_name,
@@ -174,7 +174,7 @@
  module.exports = {
    create: [
      hasProperties,
-     asyncErrorBoundary(validateReservation),
+     asyncErrorBoundary(validReservation),
      asyncErrorBoundary(isNewReservation),
      asyncErrorBoundary(create),
    ],
@@ -186,7 +186,7 @@
    ],
    update: [
      hasProperties,
-     asyncErrorBoundary(validateReservation),
+     asyncErrorBoundary(validReservation),
      //asyncErrorBoundary(hasReservationId),
      asyncErrorBoundary(update),
    ],
