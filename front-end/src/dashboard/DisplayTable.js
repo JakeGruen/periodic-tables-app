@@ -27,7 +27,7 @@ export default function DisplayTable({ tables, loadTables, loadReservations }) {
                 className="card"
                 style={{
                   backgroundColor: "pink",
-                  border: "solid 2px blue",
+                  border: "solid 2px red",
                   marginBottom: "15px",
                 }}
               >
