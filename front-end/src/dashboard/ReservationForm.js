@@ -132,7 +132,7 @@ export default function NewReservationForm({ loadReservations }) {
   return (
     <div className="container pl-0">
       <div className="dashboard-title">
-        <h1>Add / Edit Reservation</h1>
+        <h1 style={{textAlign: 'center'}}>Add / Edit Reservation</h1>
       </div>
 
       <hr className="page-title-separator" />
