@@ -1,5 +1,10 @@
 .side-bar {
-  background-color: #393a44;
-  min-width: 200px;
+  background-color: lightpink;
+  min-width: min-content;
   height: 120vh;
+  text-emphasis-color: white;
+}
+
+div{
+  justify-items: center;
 }
