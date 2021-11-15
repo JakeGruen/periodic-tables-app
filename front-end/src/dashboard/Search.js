@@ -33,7 +33,7 @@ export default function SearchByPhone() {
   return (
     <div className="container ">
       <div className="dashboard-title">
-        <h1 style={{textAlign: 'center'}}>Search</h1>
+        <h1 style={{textAlign: 'center', WebkitTextFillColor: "darkgray", marginTop: '10px'}}>Search</h1>
       </div>
 
       <hr className="page-title-separator" />

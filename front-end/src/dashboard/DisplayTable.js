@@ -17,6 +17,9 @@ export default function DisplayTable({ tables, loadTables, loadReservations }) {
     }
   };
 
+
+
+
   return (
     <div>
       <ul className="tables_list p-0">
@@ -46,6 +49,7 @@ export default function DisplayTable({ tables, loadTables, loadReservations }) {
                       Finish
                     </button>
                   ) : null}
+            
                 </div>
               </div>
             </li>
@@ -74,6 +78,7 @@ export default function DisplayTable({ tables, loadTables, loadReservations }) {
                       Finish
                     </button>
                   ) : null}
+          
                 </div>
               </div>
             </li>
@@ -82,5 +87,4 @@ export default function DisplayTable({ tables, loadTables, loadReservations }) {
       </ul>
     </div>
   );
-}
-
+};

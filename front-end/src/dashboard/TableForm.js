@@ -70,7 +70,7 @@ export default function NewTableForm() {
   return (
     <div className="container pl-0">
       <div className="dashboard-title">
-        <h1 style={{textAlign: 'center'}}>Add / Edit Table</h1>
+        <h1 style={{textAlign: 'center', marginTop: '10px', WebkitTextFillColor: 'darkgray'}}>Add / Edit Table</h1>
       </div>
 
       <hr className="page-title-separator" />

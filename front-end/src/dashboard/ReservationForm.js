@@ -9,12 +9,12 @@ import ErrorAlert from "../layout/ErrorAlert";
 import formatReservationDate from "../utils/format-reservation-date";
 import formatReservationTime from "../utils/format-reservation-time";
 
-export default function NewReservationForm({ loadReservations }) {
+export default function DisplayReservationForm({ loadReservations }) {
   const history = useHistory();
 
   const { reservation_id } = useParams();
   /* eslint-disable */
-  let initialReservationData = {
+  let initialData = {
     first_name: "",
     last_name: "",
     mobile_number: "",
@@ -26,7 +26,7 @@ export default function NewReservationForm({ loadReservations }) {
   const [errors, setErrors] = useState([]);
 
   const [reservationData, setReservationData] = useState({
-    ...initialReservationData,
+    ...initialData,
   });
 
   useEffect(() => {
@@ -46,13 +46,13 @@ export default function NewReservationForm({ loadReservations }) {
         })
         .catch(setErrors);
     } else {
-      setReservationData({ ...initialReservationData });
+      setReservationData({ ...initialData });
     }
   }, [reservation_id]);
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    if (checkBusinessHours() !== false) {
+    if (getBusinessHours() !== false) {
       try {
         if (reservation_id) {
           await updateExistingReservation(reservation_id, {
@@ -89,11 +89,11 @@ export default function NewReservationForm({ loadReservations }) {
 
   const cancelHandler = async (event) => {
     event.preventDefault();
-    setReservationData({ ...initialReservationData });
+    setReservationData({ ...initialData });
     history.goBack();
   };
 
-  const checkBusinessHours = async () => {
+  const getBusinessHours = async () => {
     const reservationDate = new Date(
       `${reservationData.reservation_date}T${reservationData.reservation_time}:00.000`
     );
@@ -132,7 +132,7 @@ export default function NewReservationForm({ loadReservations }) {
   return (
     <div className="container pl-0">
       <div className="dashboard-title">
-        <h1 style={{textAlign: 'center'}}>Add / Edit Reservation</h1>
+        <h1 style={{textAlign: 'center', WebkitTextFillColor: 'darkgray', marginTop: '10px'}}>Add / Edit Reservation</h1>
       </div>
 
       <hr className="page-title-separator" />

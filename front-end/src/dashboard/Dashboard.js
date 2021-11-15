@@ -27,9 +27,9 @@ export default function Dashboard({
       res.status !== "cancelled"
   );
   return (
-    <main className="main container-fluid">
+    <main  className="main container-fluid">
       <div className="dashboard-title">
-        <h1 style={{textAlign: 'center'}}>Dashboard</h1>
+        <h1 style={{ textAlign: 'center', marginTop: '10px', WebkitTextFillColor: 'darkgray'}}>Dashboard</h1>
       </div>
 
       <hr className="page-title-separator" />
