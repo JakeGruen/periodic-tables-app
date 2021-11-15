@@ -6,14 +6,14 @@ const hasProperties = require("../errors/hasProperties")(
   "table_name",
   "capacity"
 );
-//create new table
+//Create new table
 async function create(req, res, next) {
   service
     .create(req.body.data)
     .then((data) => res.status(201).json({ data }))
     .catch(next);
 }
-//list tables
+//List tables
 async function list(req, res, next) {
   const tableList = await service.list();
   if (tableList.length > 1) {
@@ -21,7 +21,7 @@ async function list(req, res, next) {
   }
   res.json({ data: tableList });
 }
-//make changes to table(s)
+//Make changes to table(s)
 async function update(req, res, next) {
   const { reservation_id } = req.body.data;
   await resService.updateResStatus(Number(reservation_id), "seated");
@@ -31,7 +31,7 @@ async function update(req, res, next) {
   };
   res.json({ data: await service.update(updatedTable) });
 }
-//remove reservation from table
+//Remove reservation from table
 async function removeReservation(req, res, next) {
   const table = res.locals.table
   const res_id = table.reservation_id;
@@ -39,7 +39,7 @@ async function removeReservation(req, res, next) {
   const data = await resService.updateResStatus(Number(res_id), "finished")
   res.json({data})
 }
-//Validates table or throws error
+//Validate table or throws error
 function validTable(req, res, next) {
   if (!req.body.data) {
     return next({
@@ -54,18 +54,18 @@ function validTable(req, res, next) {
   if (table_name.length < 2) {
     return next({
       status: 400,
-      message: "Invalid table_name",
+      message: "Invalid table name.",
     });
   }
   if (capacity == 0 || validCapacity == false) {
     return next({
       status: 400,
-      message: "Invalid capacity",
+      message: "Invalid capacity.",
     });
   }
   next();
 }
-//Validates reservation/throws error if invalid.
+//Validate reservation/throws error if invalid.
 async function reservationValidation(req, res, next) {
   if (!req.body.data) {
     return next({
@@ -76,7 +76,7 @@ async function reservationValidation(req, res, next) {
   if (!req.body.data.reservation_id) {
     return next({
       status: 400,
-      message: "reservation_id not found",
+      message: "Reservation id not found.",
     });
   }
   const reservation = await resService.listById(req.body.data.reservation_id);
@@ -84,13 +84,13 @@ async function reservationValidation(req, res, next) {
   if (reservation === undefined) {
     return next({
       status: 404,
-      message: `reservation_id: ${req.body.data.reservation_id} not found`,
+      message: `reservation_id: ${req.body.data.reservation_id} not found.`,
     });
   }
   res.locals.reservation = reservation;
   next();
 }
-//Validates table capacity
+//Validate table capacity
 async function validateTableCapacity(req, res, next) {
   const reservation = res.locals.reservation;
   const { table_id } = req.params;
@@ -100,13 +100,13 @@ async function validateTableCapacity(req, res, next) {
     if (reservation.people > table.capacity) {
       return next({
         status: 400,
-        message: "insufficient table capacity",
+        message: "Insufficient table capacity.",
       });
     }
     if (table.reservation_id) {
       return next({
         status: 400,
-        message: "table is occupied",
+        message: "Table is occupied.",
       });
     }
 
@@ -118,7 +118,7 @@ async function validateTableCapacity(req, res, next) {
     });
   }
 }
-//checks if table is occupied
+//Checks if table is occupied
 async function isTableOccupied(req, res, next){
   const { table_id } = req.params;
   const table = await service.read(table_id)
@@ -131,13 +131,13 @@ async function isTableOccupied(req, res, next){
   if(!table.reservation_id){
     return next({
       status: 400,
-      message: `Table: ${table.table_id} is not occupied`
+      message: `Table: ${table.table_id} is not occupied.`
     })
   }
   res.locals.table = table;
   next();
 }
-//checks if guests have already been seated.
+//Checks if guests are already seated.
 async function alreadySeated(req, res, next){
   const status = res.locals.reservation.status;
   if(status === "seated"){
