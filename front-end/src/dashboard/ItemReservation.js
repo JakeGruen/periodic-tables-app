@@ -17,7 +17,7 @@ export default function ItemReservation({ reservation, loadReservations}){
     
       const cancelHandler = async (reservation_id) => {
         const confirm = window.confirm(
-          "Are you sure you want to cancel this reservation? This cannot be undone."
+          "Cancel Reservation? This cannot be undone."
         );
         if (confirm) {
           try {

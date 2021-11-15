@@ -17,7 +17,7 @@ export default function SeatReservation({
   const [tableId, setTableId] = useState(0);
   const [reservationData, setReservationData] = useState({});
 
-  function getRes() {
+  function loadRes() {
     const abortController = new AbortController();
     setError(null);
     getReservationById(reservation_id, abortController.signal)
@@ -25,18 +25,18 @@ export default function SeatReservation({
       .catch(setError);
   }
 
-  useEffect(getRes, [reservation_id]);
+  useEffect(loadRes, [reservation_id]);
 
   const validation = () => {
     const errors = [];
     let valid = true;
     const table = tables.find((table) => table.table_id === Number(tableId));
     if (reservationData.people > table.capacity) {
-      errors.push({ message: "Table not large enough" });
+      errors.push({ message: "Table not large enough." });
       valid = false;
     }
     if (table.reservation_id) {
-      errors.push({ message: "Table is occupied" });
+      errors.push({ message: "Table is occupied." });
       valid = false;
     }
     setDataError(errors);

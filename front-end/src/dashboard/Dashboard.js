@@ -16,8 +16,8 @@ export default function Dashboard({
   reservationsError,
   tables,
   tablesError,
-  loadTables,
-  loadReservations,
+  getTables,
+  getReservations,
 }) {
   const history = useHistory();
   const filteredReservations = reservations.filter(
@@ -73,7 +73,7 @@ export default function Dashboard({
           <div className="reservation-list">
             <DisplayReservation
               filteredList={filteredReservations}
-              loadReservations={loadReservations}
+              getReservations={getReservations}
             />
           </div>
         </div>
@@ -87,8 +87,8 @@ export default function Dashboard({
           <div className="table-list">
             <DisplayTable
               tables={tables}
-              loadTables={loadTables}
-              loadReservations={loadReservations}
+              getTables={getTables}
+              getReservations={getReservations}
             />
           </div>
         </div>

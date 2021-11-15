@@ -7,53 +7,53 @@ import { today } from "../utils/date-time";
 export default function NewTableForm() {
   const history = useHistory();
 
-  const initialtableData = {
+  const initialtableInfo = {
     table_name: "",
     capacity: 0,
     status: false,
   };
   const [errors, setErrors] = useState([]);
 
-  const [tableData, setTableData] = useState({
-    ...initialtableData,
+  const [tableInfo, settableInfo] = useState({
+    ...initialtableInfo,
   });
 
   const submitHandler = async (event) => {
     event.preventDefault();
     if (checkTableReqs() !== false) {
-      await createTable(tableData).then((res) =>
+      await createTable(tableInfo).then((res) =>
         history.push(`/dashboard?date=${today()}`)
       );
     }
   };
 
   const nameHandler = ({ target }) => {
-    setTableData({
-      ...tableData,
+    settableInfo({
+      ...tableInfo,
       [target.name]: target.value,
     });
   };
   const capacityHandler = ({ target }) => {
-    setTableData({
-      ...tableData,
+    settableInfo({
+      ...tableInfo,
       [target.name]: Number(target.value),
     });
   };
 
   const cancelHandler = async (event) => {
     event.preventDefault();
-    setTableData({ ...initialtableData });
+    settableInfo({ ...initialtableInfo });
     history.goBack();
   };
 
   const checkTableReqs = async () => {
     const foundErrors = [];
-    if (tableData.table_name.length < 2) {
+    if (tableInfo.table_name.length < 2) {
       foundErrors.push({
-        message: "Error: table_name must be at least two characters long",
+        message: "Error: table name must be at least two characters long.",
       });
     }
-    if (tableData.capacity < 1) {
+    if (tableInfo.capacity < 1) {
       foundErrors.push({
         message: "Error: table must hold at least one person.",
       });
@@ -70,7 +70,7 @@ export default function NewTableForm() {
   return (
     <div className="container pl-0">
       <div className="dashboard-title">
-        <h1 style={{textAlign: 'center', marginTop: '10px', WebkitTextFillColor: 'darkgray'}}>Add / Edit Table</h1>
+        <h1 style={{textAlign: 'center', marginTop: 10, WebkitTextFillColor: 'darkgray'}}>Add / Edit Table</h1>
       </div>
 
       <hr className="page-title-separator" />
@@ -82,7 +82,7 @@ export default function NewTableForm() {
             <div className="form-group">
               <label>Table Name:</label>
               <input
-                value={tableData.table_name}
+                value={tableInfo.table_name}
                 className="form-control"
                 onChange={nameHandler}
                 id="table_name"
@@ -93,7 +93,7 @@ export default function NewTableForm() {
               />
               <label>Capacity</label>
               <input
-                value={tableData.capacity}
+                value={tableInfo.capacity}
                 onChange={capacityHandler}
                 className="form-control mb-2"
                 id="capacity"

@@ -45,7 +45,7 @@
      ? res.json({ data: reservationById })
      : next({
          status: 404,
-         message: `Reservation Id: ${id} Not Found`,
+         message: `Reservation Id: ${id} not found.`,
        });
  }
  
@@ -57,7 +57,7 @@
    }else{
      next({
        status: 404,
-       message: "no reservation_id found"
+       message: "No reservation_id found."
      })
    }
  }
@@ -98,7 +98,7 @@
    ) {
      return next({
        status: 400,
-       message: "Error: Restaurant is will open at 10:30AM.",
+       message: "Error: Restaurant opens at 10:30AM.",
      });
    } else if (
      reservationDate.getHours() > 22 ||
@@ -106,7 +106,7 @@
    ) {
      return next({
        status: 400,
-       message: "Error: Restaurant is closed after 10:30PM.",
+       message: "Error: Restaurant is closes 10:30PM.",
      });
    } else if (
      reservationDate.getHours() > 21 ||
@@ -115,7 +115,7 @@
      return next({
        status: 400,
        message:
-         "Error: Reservation must be made at least an hour before closing.",
+         "Error: Reservation must be made one hour before closing.",
      });
    }
    if (
@@ -154,7 +154,7 @@
    if (reservation.status === "finished") {
      return next({
        status: 400,
-       message: "a finished reservation cannot be updated",
+       message: "A finished reservation cannot be updated.",
      });
    }
    next();
@@ -165,7 +165,7 @@
    if (reservation.status === "seated" || reservation.status === "finished") {
      return next({
        status: 400,
-       message: `${reservation.status} should be booked when creating a new reservation`,
+       message: `${reservation.status} should be booked when creating a new reservation.`,
      });
    }
    next();
@@ -187,7 +187,6 @@
    update: [
      hasProperties,
      asyncErrorBoundary(validReservation),
-     //asyncErrorBoundary(hasReservationId),
      asyncErrorBoundary(update),
    ],
  };

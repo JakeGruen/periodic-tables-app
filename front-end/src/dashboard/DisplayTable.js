@@ -4,7 +4,7 @@ import { deleteReservationFromTable } from "../utils/api";
 export default function DisplayTable({ tables, loadTables, loadReservations }) {
   const finishHandler = async (table_id) => {
     const finished = window.confirm(
-      "Ready to seat new guests?"
+      "Seat Guests?"
     );
     if (finished) {
       try {

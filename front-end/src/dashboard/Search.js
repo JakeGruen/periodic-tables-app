@@ -7,7 +7,7 @@ import DisplayReservation from "./DisplayReservation";
 export default function SearchByPhone() {
   const [phoneNum, setPhoneNum] = useState({});
   const [errors, setErrors] = useState([]);
-  const [resByPhone, setResByPhone] = useState([]);
+  const [findByPhone, setfindByPhone] = useState([]);
   const [status, setStatus] = useState(true);
 
   const clickHandler = async (event) => {
@@ -15,7 +15,7 @@ export default function SearchByPhone() {
     const data = await listReservations({
       mobile_number: phoneNum.mobile_number,
     });
-    data.length < 1 ? setStatus(false) : setResByPhone(data);
+    data.length < 1 ? setStatus(false) : setfindByPhone(data);
   };
 
   const changeHandler = ({ target }) => {
@@ -39,12 +39,12 @@ export default function SearchByPhone() {
       <hr className="page-title-separator" />
       <form>
         <div className="form-group">
-          <label>Search for a Reservation: </label>
+          <label>Search Reservations: </label>
           <input
             name="mobile_number"
             className="form-control mb-2"
             value={phoneNum.mobile_number}
-            placeholder="Enter a customer's phone number"
+            placeholder="Enter a phone number"
             type="text"
             id="mobile_number"
             onChange={changeHandler}
@@ -58,7 +58,7 @@ export default function SearchByPhone() {
       {errorList()}
       <div className="container-fluid p-0">
         {status ? (
-          <DisplayReservation filteredList={resByPhone} />
+          <DisplayReservation filteredList={findByPhone} />
         ) : (
           <p style={{ color: "yellow" }}>No reservations found</p>
         )}

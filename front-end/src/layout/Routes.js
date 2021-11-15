@@ -24,9 +24,9 @@ function Routes() {
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
   const [tableError, settableError] = useState(null);
-  useEffect(loadDashboard, [date]);
+  useEffect(showDash, [date]);
 
-  function loadDashboard() {
+  function showDash() {
     const abortController = new AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)

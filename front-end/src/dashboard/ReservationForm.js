@@ -25,7 +25,7 @@ export default function DisplayReservationForm({ loadReservations }) {
 
   const [errors, setErrors] = useState([]);
 
-  const [reservationData, setReservationData] = useState({
+  const [reservationInfo, setreservationInfo] = useState({
     ...initialData,
   });
 
@@ -35,7 +35,7 @@ export default function DisplayReservationForm({ loadReservations }) {
         .then((reservation) => {
           formatReservationDate(reservation);
           formatReservationTime(reservation);
-          setReservationData({
+          setreservationInfo({
             first_name: reservation.first_name,
             last_name: reservation.last_name,
             mobile_number: reservation.mobile_number,
@@ -46,7 +46,7 @@ export default function DisplayReservationForm({ loadReservations }) {
         })
         .catch(setErrors);
     } else {
-      setReservationData({ ...initialData });
+      setreservationInfo({ ...initialData });
     }
   }, [reservation_id]);
 
@@ -56,15 +56,15 @@ export default function DisplayReservationForm({ loadReservations }) {
       try {
         if (reservation_id) {
           await updateExistingReservation(reservation_id, {
-            ...reservationData,
+            ...reservationInfo,
             reservation_id: reservation_id,
             status: "booked",
           });
           await loadReservations();
-          history.push(`/dashboard?date=${reservationData.reservation_date}`);
+          history.push(`/dashboard?date=${reservationInfo.reservation_date}`);
         } else {
-          await createReservation(reservationData).then((res) =>
-            history.push(`/dashboard?date=${reservationData.reservation_date}`)
+          await createReservation(reservationInfo).then((res) =>
+            history.push(`/dashboard?date=${reservationInfo.reservation_date}`)
           );
         }
       } catch (error) {
@@ -74,36 +74,36 @@ export default function DisplayReservationForm({ loadReservations }) {
   };
 
   const changeHandler = ({ target }) => {
-    setReservationData({
-      ...reservationData,
+    setreservationInfo({
+      ...reservationInfo,
       [target.name]: target.value,
     });
   };
 
-  const peopleHandler = ({ target }) => {
-    setReservationData({
-      ...reservationData,
+  const numOfGuestsHandler = ({ target }) => {
+    setreservationInfo({
+      ...reservationInfo,
       [target.name]: Number(target.value),
     });
   };
 
   const cancelHandler = async (event) => {
     event.preventDefault();
-    setReservationData({ ...initialData });
+    setreservationInfo({ ...initialData });
     history.goBack();
   };
 
   const getBusinessHours = async () => {
     const reservationDate = new Date(
-      `${reservationData.reservation_date}T${reservationData.reservation_time}:00.000`
+      `${reservationInfo.reservation_date}T${reservationInfo.reservation_time}:00.000`
     );
     const todaysDate = new Date();
     const foundErrors = [];
     if (reservationDate < todaysDate) {
-      foundErrors.push({ message: "Can't reserve a day from the past" });
+      foundErrors.push({ message: "Date has already passed." });
     }
     if (reservationDate.getDay() === 2) {
-      foundErrors.push({ message: "Restaurant is closed on tuesdays" });
+      foundErrors.push({ message: "Sorry, the restaurant is closed on Tuesdays." });
     }
     if (
       reservationDate.getHours() < 10 ||
@@ -111,14 +111,14 @@ export default function DisplayReservationForm({ loadReservations }) {
         reservationDate.getMinutes() <= 30) ||
       reservationDate.getHours() >= 22
     ) {
-      foundErrors.push({ message: "The Restaurant opens at 10:30am" });
+      foundErrors.push({ message: "The restaurant opens at 10:30am." });
     } else if (
       reservationDate.getHours() === 21 &&
       reservationDate.getMinutes() >= 30
     ) {
       foundErrors.push({
         message:
-          "the restaurant closes at 10:30 PM and the customer needs to have time to enjoy their meal",
+          "The restaurant closes at 10:30 PM, and the customer must have time to enjoy their meal.",
       });
     }
     setErrors(foundErrors);
@@ -144,10 +144,10 @@ export default function DisplayReservationForm({ loadReservations }) {
             <div className="form-group">
               <label>First Name</label>
               <input
-                value={reservationData.first_name}
+                value={reservationInfo.first_name}
                 onChange={changeHandler}
                 id="first_name"
-                placeholder="Enter a First Name"
+                placeholder="Enter a first name."
                 type="text"
                 name="first_name"
                 className="form-control"
@@ -155,10 +155,10 @@ export default function DisplayReservationForm({ loadReservations }) {
               />
               <label>Last Name</label>
               <input
-                value={reservationData.last_name}
+                value={reservationInfo.last_name}
                 onChange={changeHandler}
                 id="last_name"
-                placeholder="Enter a Last Name"
+                placeholder="Enter a last name."
                 type="text"
                 name="last_name"
                 className="form-control"
@@ -167,10 +167,10 @@ export default function DisplayReservationForm({ loadReservations }) {
               <label>Phone Number</label>
 
               <input
-                value={reservationData.mobile_number}
+                value={reservationInfo.mobile_number}
                 onChange={changeHandler}
                 id="mobile_number"
-                placeholder="Enter a Phone Number"
+                placeholder="Enter a phone number."
                 type="tel"
                 name="mobile_number"
                 className="form-control"
@@ -179,7 +179,7 @@ export default function DisplayReservationForm({ loadReservations }) {
               <label>Reservation Date</label>
 
               <input
-                value={reservationData.reservation_date}
+                value={reservationInfo.reservation_date}
                 onChange={changeHandler}
                 id="reservation_date"
                 type="date"
@@ -190,7 +190,7 @@ export default function DisplayReservationForm({ loadReservations }) {
               <label>Reservation Time</label>
 
               <input
-                value={reservationData.reservation_time}
+                value={reservationInfo.reservation_time}
                 onChange={changeHandler}
                 id="reservation_time"
                 type="time"
@@ -201,8 +201,8 @@ export default function DisplayReservationForm({ loadReservations }) {
               <label>Party Size</label>
 
               <input
-                value={reservationData.people}
-                onChange={peopleHandler}
+                value={reservationInfo.people}
+                onChange={numOfGuestsHandler}
                 id="people"
                 type="number"
                 name="people"
