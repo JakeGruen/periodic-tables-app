@@ -54,7 +54,7 @@ function validTable(req, res, next) {
   if (table_name.length < 2) {
     return next({
       status: 400,
-      message: "Invalid table name.",
+      message: "Invalid table_name",
     });
   }
   if (capacity == 0 || validCapacity == false) {
@@ -76,7 +76,7 @@ async function reservationValidation(req, res, next) {
   if (!req.body.data.reservation_id) {
     return next({
       status: 400,
-      message: "Reservation id not found.",
+      message: "reservation_id not found.",
     });
   }
   const reservation = await resService.listById(req.body.data.reservation_id);
