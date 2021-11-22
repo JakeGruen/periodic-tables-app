@@ -91,6 +91,7 @@ export default function DisplayReservationForm({ loadReservations }) {
     event.preventDefault();
     setreservationInfo({ ...initialData });
     history.goBack();
+    window.location.reload();
   };
 
   const getBusinessHours = async () => {
