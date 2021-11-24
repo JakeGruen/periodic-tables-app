@@ -32,7 +32,7 @@ Seat guests (remove reservation from table):
 https://jg-reservation-app-server.herokuapp.com/tables/:tableId/seat
 
 ## Screenshots:
-![Add/Edit Reservation](./readme-images/add-edit-reservation.jpeg)
+![Add/Edit Reservation](https://drive.google.com/file/d/1sKv7CDSgbW2__zmCFsrN3ojOj6Vxufuj/view?usp=sharing)
 ![Dashboard](./readme-images/Dashboard.jpeg)
 ![Search Reservations](./readme-images/reservationSearch.jpeg)
 ![Add/Edit Table](./readme-images/add-edit-table.jpeg)
