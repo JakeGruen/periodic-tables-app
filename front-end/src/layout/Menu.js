@@ -16,7 +16,7 @@ function Menu() {
           className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
           to="/"
         >
-          <div className="sidebar-brand-text mx-3" style={{marginTop: '10px'}}>
+          <div className="sidebar-brand-text mx-3" style={{marginTop: '10px', color: 'darkslateblue'}}>
             <span>Periodic Tables</span>
           </div>
         </Link>
@@ -48,11 +48,7 @@ function Menu() {
           </li>
         </ul>
         <div className="text-center d-none d-md-inline">
-          <button
-            className="btn rounded-circle border-0"
-            id="sidebarToggle"
-            type="button"
-          />
+          
         </div>
       </div>
     </nav>
